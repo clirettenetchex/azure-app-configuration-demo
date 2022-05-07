@@ -1,0 +1,12 @@
+﻿@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+
+<style>
+    body {
+        background-color: @Configuration["TestApp:Settings:BackgroundColor"]
+    }
+</style>
+
+<h1>@Configuration["TestApp:Settings:Message"]</h1>
+
+<p>@Configuration["message"]</p>
