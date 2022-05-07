@@ -3,9 +3,9 @@ using Microsoft.Extensions.Configuration.AzureAppConfiguration;
 
 var builder = WebApplication.CreateBuilder(args);
 
-Func<AzureAppConfigurationOptions, IWebHostEnvironment, AzureAppConfigurationOptions> useManagedIdentitiesForProduction = (appConfigurationOptions, env) => env.IsProduction()
-    ? appConfigurationOptions.Connect(new Uri("https://app-configurationn.azconfig.io"), new ManagedIdentityCredential())
-    : appConfigurationOptions.Connect(builder.Configuration.GetConnectionString("AppConfig"));
+Func<AzureAppConfigurationOptions, IWebHostEnvironment, AzureAppConfigurationOptions> useManagedIdentitiesForProduction = (appConfigurationOptions, env) => env.IsDevelopment()
+    ? appConfigurationOptions.Connect(builder.Configuration.GetConnectionString("AppConfig"))
+    : appConfigurationOptions.Connect(new Uri("https://app-configurationn.azconfig.io"), new ManagedIdentityCredential());
 
 builder.Host.ConfigureAppConfiguration(configBuilder =>
 {
